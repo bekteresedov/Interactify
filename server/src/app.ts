@@ -1,9 +1,10 @@
 import express, { Express, } from "express";
 import { config } from "dotenv"
+import connect from "./utils/db/dbConnect";
 
 
 config();
-
+connect();
 const server: Express = express();
 
 const PORT: String = process.env.APP_PORT as String;
