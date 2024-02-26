@@ -1,4 +1,4 @@
-import { IUser } from "../interfaces/models/IUser";
+import { IUser, } from '../interfaces/models/IUser';
 
 import mongoose, { Schema, Document } from 'mongoose';
 
@@ -27,7 +27,11 @@ const UserSchema: Schema<IUser> = new mongoose.Schema({
         type: String,
     },
     birth: {
-        type: [String]
+        type: {
+            day: Number,
+            month: Number,
+            year: Number
+        }
     }
 
 

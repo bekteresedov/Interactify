@@ -1,4 +1,10 @@
 import { Document } from "mongoose";
+interface IBirth {
+    day: Number;
+    month: Number;
+    year: Number
+}
+
 export interface IUser extends Document {
     username: String
     email: String
@@ -6,7 +12,7 @@ export interface IUser extends Document {
     surname: String
     password: String
     bio: String
-    birth: String[]
+    birth: IBirth
     profilePhoto: String
 
 }
