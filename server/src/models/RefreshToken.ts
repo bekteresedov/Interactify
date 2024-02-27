@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { IRefreshToken } from "../interfaces/models/IRefreshToken";
 import { Schema } from "mongoose";
 
