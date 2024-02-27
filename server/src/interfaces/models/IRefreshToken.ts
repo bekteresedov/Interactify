@@ -1,4 +1,7 @@
+import { Types } from "mongoose";
+import { IUser } from "./IUser";
+
 export interface IRefreshToken extends Document {
-    token: string;
-    userId: string;
+    token: String;
+    user: Types.ObjectId | IUser;
 }

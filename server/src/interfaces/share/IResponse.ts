@@ -1,5 +1,5 @@
 export interface IResponse<T> {
-    success: boolean;
+    success: Boolean;
     content?: T;
-    message: string | string[];
+    message: String | String[];
 }

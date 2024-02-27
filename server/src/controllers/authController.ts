@@ -5,6 +5,7 @@ import { IAuthResponse, modelToDto } from "../interfaces/response/IAuthResponse"
 import bcrypt from 'bcrypt';
 import { User } from "../models/User";
 import { IUser } from "../interfaces/models/IUser";
+import { generateAccessToken } from "../authorization/generateToken";
 export const userLogin = async (request: Request, response: Response<IResponse<IAuthResponse>>) => {
     try {
         const { username, password, email } = request.body;
@@ -22,16 +23,16 @@ export const userLogin = async (request: Request, response: Response<IResponse<I
         if (!findUser || findUser.email !== email || !(await bcrypt.compare(password, findUser.password as string))) {
             return response.status(401).json({ success: false, message: "The username, email, or password is incorrect" });
         }
-        // const accessToken: string = createTokenByUser(findUser);
+        const accessToken: String = generateAccessToken(findUser._id, findUser.username);
 
-        // response.cookie("authToken", accessToken, {
-        //     expires: new Date(Date.now() + 48 * 60 * 60 * 1000),
-        //     httpOnly: true,
-        //     secure: true,
-        //     sameSite: 'none',
-        // });
+        response.cookie("accessToken", accessToken, {
+            expires: new Date(Date.now() + 15 * 60 * 1000),
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+        });
 
-        return response.status(200).json({ success: true, message: "Success" });
+        return response.status(200).json({ success: true, message: "User login successfully" });
     } catch (error: any) {
         console.log(error);
         return response.status(500).json({ success: false, message: "Internal Server Error" })
