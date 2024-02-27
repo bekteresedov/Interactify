@@ -11,6 +11,7 @@ const UserSchema: Schema<IUser> = new mongoose.Schema({
     },
     email: {
         type: String,
+        unique: true,
     },
     name: {
         type: String,
