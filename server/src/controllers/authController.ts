@@ -5,8 +5,7 @@ import { IAuthResponse, modelToDto } from "../interfaces/response/IAuthResponse"
 import bcrypt from 'bcrypt';
 import { User } from "../models/User";
 import { IUser } from "../interfaces/models/IUser";
-import { generateAccessToken, generateRefreshToken } from "../authorization/generateToken";
-import { RefreshToken } from "../models/RefreshToken";
+import { generateAccessToken, } from "../authorization/generateToken";
 export const userLogin = async (request: Request, response: Response<IResponse<IAuthResponse>>) => {
     try {
         const { username, password, email } = request.body;
@@ -25,17 +24,9 @@ export const userLogin = async (request: Request, response: Response<IResponse<I
             return response.status(401).json({ success: false, message: "The username, email, or password is incorrect" });
         }
         const accessToken: String = generateAccessToken(findUser._id, findUser.username);
-        const refreshToken: String = generateRefreshToken(findUser._id, findUser.username);
-        const findToken = await RefreshToken.findOne({ user: findUser.id });
-
-        if (!findToken) {
-            await RefreshToken.create({ token: refreshToken, user: findUser._id })
-        } else {
-            await RefreshToken.findByIdAndUpdate(findToken._id, { token: refreshToken })
-        }
 
         response.cookie("accessToken", accessToken, {
-            expires: new Date(Date.now() + 40 * 60 * 1000),
+            expires: new Date(Date.now() + 48 * 60 * 60 * 1000),
             httpOnly: true,
             secure: true,
             sameSite: 'none',
@@ -65,10 +56,8 @@ export const userRegister = async (request: Request, response: Response<IRespons
         const createUser: IUser = await User.create({ ...request.body, password: passwordHash });
 
         const accessToken: String = generateAccessToken(createUser._id, createUser.username);
-        const refreshToken: String = generateRefreshToken(createUser._id, createUser.username);
-        await RefreshToken.create({ token: refreshToken, user: createUser._id })
         response.cookie("accessToken", accessToken, {
-            expires: new Date(Date.now() + 40 * 60 * 1000),
+            expires: new Date(Date.now() + 48 * 60 * 60 * 1000),
             httpOnly: true,
             secure: true,
             sameSite: 'none',
@@ -90,4 +79,21 @@ export const userRegister = async (request: Request, response: Response<IRespons
         return response.status(500).json({ success: false, message: "Internal Server Error" })
     }
 
+}
+
+
+export const signOutUser = async (request: Request, response: Response<IResponse<void>>) => {
+    try {
+        const accessToken = request.cookies.accessToken;
+
+        if (!accessToken) {
+            return response.status(200).json({ success: true, message: "User is already signed out" });
+        }
+
+        response.clearCookie('accessToken', { httpOnly: true, secure: true });
+        return response.status(200).json({ success: true, message: "User signed out successfully" });
+    } catch (error: any) {
+        console.error(error);
+        return response.status(500).json({ success: false, message: "Internal Server Error" });
+    }
 }
