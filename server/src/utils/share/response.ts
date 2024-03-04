@@ -1,15 +1,15 @@
 import { Response } from "express"
 import { IResponse } from "../../interfaces/share/IResponse"
 
-export class ShareResponse<T> {
-    public content: T
+export class ApiResponse<T> {
+    public content?: T
     public message: string
     constructor(content: T, message: string) {
         this.content = content
         this.message = message
     }
 
-    success(response: Response) {
+    public success(response: Response<IResponse<T>>) {
         return response.status(200).json({
             success: true,
             content: this.content,
@@ -17,7 +17,7 @@ export class ShareResponse<T> {
         })
     }
 
-    created(response: Response<IResponse<T>>) {
+    public created(response: Response<IResponse<T>>) {
         return response.status(201).json({
             success: true,
             content: this.content,

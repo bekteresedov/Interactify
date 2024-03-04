@@ -1,20 +1,20 @@
 import Joi from 'joi';
 
 export const loginSchema = Joi.object({
-    username: Joi.string().required().min(4).max(20).messages({
+    username: Joi.string().trim().required().min(4).max(20).messages({
         'string.base': 'Username must be a string',
         'string.empty': 'Username is required',
         'string.min': 'Username must be at least 4 characters long',
         'string.max': 'Username cannot exceed 20 characters',
         'any.required': 'Username is required'
     }),
-    email: Joi.string().email().required().messages({
+    email: Joi.string().trim().email().required().messages({
         'string.base': 'Email must be a string',
         'string.empty': 'Email is required',
         'string.email': 'Invalid email format',
         'any.required': 'Email is required'
     }),
-    password: Joi.string().required().min(8).pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$')).messages({
+    password: Joi.string().trim().required().min(8).pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$')).messages({
         'string.base': 'Password must be a string',
         'string.empty': 'Password is required',
         'string.min': 'Password must be at least 8 characters long',
@@ -25,20 +25,20 @@ export const loginSchema = Joi.object({
 
 
 export const registerSchema = Joi.object({
-    username: Joi.string().required().min(4).max(20).messages({
+    username: Joi.string().trim().required().min(4).max(20).messages({
         'string.base': 'Username must be a string',
         'string.empty': 'Username is required',
         'string.min': 'Username must be at least 4 characters long',
         'string.max': 'Username cannot exceed 20 characters',
         'any.required': 'Username is required'
     }),
-    email: Joi.string().email().required().messages({
+    email: Joi.string().trim().email().required().messages({
         'string.base': 'Email must be a string',
         'string.empty': 'Email is required',
         'string.email': 'Invalid email format',
         'any.required': 'Email is required'
     }),
-    password: Joi.string().required().min(8).pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$')).messages({
+    password: Joi.string().trim().required().min(8).pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$')).messages({
         'string.base': 'Password must be a string',
         'string.empty': 'Password is required',
         'string.min': 'Password must be at least 8 characters long',
@@ -72,14 +72,14 @@ export const registerSchema = Joi.object({
         'object.empty': 'Birth object cannot be empty',
         'any.required': 'Birth is required'
     }),
-    name: Joi.string().required().min(3).max(20).messages({
+    name: Joi.string().trim().required().min(3).max(20).messages({
         'string.base': 'Name must be a string',
         'string.empty': 'Name is required',
         'string.min': 'Name must be at least 3 characters long',
         'string.max': 'Name cannot exceed 20 characters',
         'any.required': 'Name is required'
     }),
-    surname: Joi.string().required().min(3).max(30).messages({
+    surname: Joi.string().trim().required().min(3).max(30).messages({
         'string.base': 'Surname must be a string',
         'string.empty': 'Surname is required',
         'string.min': 'Surname must be at least 3 characters long',
