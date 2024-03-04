@@ -2,12 +2,12 @@ import { Request, Response } from "express";
 import { IResponse } from "../interfaces/share/IResponse";
 import { IAuthResponse, modelToDto } from "../interfaces/response/IAuthResponse";
 import bcrypt from 'bcrypt';
-import { User } from "../models/user.model";
 import { IUser } from "../interfaces/models/IUser";
 import { generateAccessToken, } from "../authorization/generateToken";
 import nodemailer, { SendMailOptions } from 'nodemailer';
 import { ApiResponse } from "../utils/share/response";
 import { APIError } from "../utils/errors/APIError";
+import { User } from "../models/user.model";
 export const userLogin = async (request: Request, response: Response<IResponse<IAuthResponse>>) => {
     const { username, password, email } = request.body;
     const findUser: IUser = await User.findOne({ username }) as IUser;

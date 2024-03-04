@@ -1,6 +1,6 @@
-import { IUser, } from '../interfaces/models/IUser';
 
 import mongoose, { Schema, Document } from 'mongoose';
+import { IUser } from '../interfaces/models/IUser';
 
 
 
