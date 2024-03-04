@@ -1,8 +1,5 @@
 {
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "joi": "^17.12.2",
-    "jsonwebtoken": "^9.0.2",
-    "yup": "^1.3.3"
+    "bcrypt": "^5.1.1"
   }
 }
