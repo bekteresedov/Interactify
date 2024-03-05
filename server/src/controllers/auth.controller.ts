@@ -82,18 +82,16 @@ export const forgotPassword = async (request: Request, response: Response<IRespo
         const token = await bcrypt.hash(user.email as string, 10);
 
         const transporter: nodemailer.Transporter = nodemailer.createTransport({
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
-            secure: false,
+            service: "gmail",
             auth: {
-                user: "fa09aa5b2e7c56",
-                pass: "6f492ac41a6339"
-            }
-        });
+                user: "Good",
+                pass: "ffwezlgyuhzhkfgz",
+            },
+        })
 
 
         const mailOptions: SendMailOptions = {
-            from: 'info@mailtrap.ru',
+            from: 'pubg347bekter@gmail.com',
             to: user.email as string,
             subject: 'Parola Sıfırlama Talebi',
             text: `Parolanızı sıfırlamak için aşağıdaki bağlantıyı tıklayın: http://example.com/reset-password/${token}`,
