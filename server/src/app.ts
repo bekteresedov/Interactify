@@ -15,7 +15,6 @@ server.use(cookieParser());
 server.use(express.json({ limit: '10mb' }));
 // routers
 server.use(mainPath, router)
-console.log(server.use(mainPath, router));
 
 // error handler
 server.use(errorHandlerMiddleware)

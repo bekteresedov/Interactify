@@ -29,7 +29,7 @@ export class ApiResponse<T> {
         return response.status(500).json({
             success: false,
             content: this.content,
-            message: this.message ?? "İşlem Başarısız !"
+            message: this.message ?? "Operation failed !"
         })
     }
 
@@ -37,7 +37,7 @@ export class ApiResponse<T> {
         return response.status(400).json({
             success: false,
             content: this.content,
-            message: this.message ?? "İşlem Başarısız !"
+            message: this.message ?? "Operation failed !"
         })
     }
 
@@ -53,7 +53,7 @@ export class ApiResponse<T> {
         return response.status(404).json({
             success: false,
             content: this.content,
-            message: this.message ?? "İşlem Başarısız !"
+            message: this.message ?? "Operation failed !"
         })
     }
 

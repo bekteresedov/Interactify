@@ -5,6 +5,11 @@ interface IBirth {
     year: Number
 }
 
+interface IReset {
+    code: String
+    time: String
+}
+
 export interface IUser extends Document {
     username: String
     email: String
@@ -14,5 +19,5 @@ export interface IUser extends Document {
     bio: String
     birth: IBirth
     profilePhoto: String
-
+    reset: IReset
 }

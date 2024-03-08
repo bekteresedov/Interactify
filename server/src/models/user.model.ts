@@ -34,10 +34,17 @@ const UserSchema: Schema<IUser> = new mongoose.Schema({
             month: Number,
             year: Number
         }
+    },
+    reset: {
+        code: {
+            type: String,
+            default: null
+        },
+        time: {
+            type: String,
+            default: null
+        }
     }
-
-
-
 
 },
     {
